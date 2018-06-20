@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ericwyn.ssm.dao.AdminerDao">
+    <!--定义一个 resultMap 作为 返回 List 的结构定义-->
+    <resultMap id="BaseResultMap" type="com.ericwyn.ssm.model.Adminer">
+        <!-- column 代表数据库字段名 property 代表 实体类的 属性名-->
+        <result column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+    </resultMap>
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT * FROM adminer
+    </select>
+    <insert id="insert" parameterType="com.ericwyn.ssm.model.Adminer">
+        INSERT INTO adminer(id,account,password)
+        VALUE (#{id},#{account},#{password})
+    </insert>
+    <select id="findAdminerByAccount" parameterType="java.lang.String" resultType="com.ericwyn.ssm.model.Adminer">
+        SELECT * FROM adminer WHERE adminer.account LIKE #{adminAccount}
+    </select>
+</mapper>
